@@ -1,0 +1,1254 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kompOS — кимпат67киз</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            color: white;
+            background:
+                radial-gradient(circle at 15% 20%, #3867ff 0%, transparent 35%),
+                radial-gradient(circle at 85% 15%, #00c6ff 0%, transparent 30%),
+                radial-gradient(circle at 50% 80%, #743cff 0%, transparent 40%),
+                #050817;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::before {
+            background: #008cff;
+            top: 10%;
+            left: -150px;
+        }
+
+        body::after {
+            background: #743cff;
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.25),
+                0 20px 60px rgba(0,0,0,0.25);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 5%;
+            right: 5%;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            border-radius: 25px;
+            z-index: 100;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #72d7ff;
+        }
+
+        nav .links {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 14px;
+            transition: 0.25s;
+        }
+
+        nav a:hover {
+            color: white;
+            background: rgba(255,255,255,0.15);
+        }
+
+        section {
+            scroll-margin-top: 110px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 130px 5% 80px;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 520px;
+            padding: 60px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.3),
+                0 30px 100px rgba(0,0,0,0.3);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            overflow: hidden;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 9px 17px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(70px, 10vw, 130px);
+            line-height: 0.9;
+            letter-spacing: -7px;
+            background: linear-gradient(110deg, #ffffff, #78d8ff, #b99aff, #ffffff);
+            background-size: 250%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 6s linear infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0%; }
+            100% { background-position: 250%; }
+        }
+
+        .hero h2 {
+            font-size: 27px;
+            margin-top: 25px;
+            font-weight: 500;
+        }
+
+        .hero p {
+            margin-top: 18px;
+            max-width: 600px;
+            color: rgba(255,255,255,0.68);
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            padding: 15px 25px;
+            border-radius: 17px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.20);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .primary {
+            background: linear-gradient(135deg, rgba(78,146,255,0.8), rgba(119,67,255,0.75));
+        }
+
+        .primary:hover {
+            box-shadow: 0 15px 45px rgba(75,100,255,0.4);
+        }
+
+        .hero-orb {
+            width: 260px;
+            height: 260px;
+            flex: 0 0 260px;
+            border-radius: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 110px;
+            font-weight: 200;
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,0.30),
+                rgba(80,180,255,0.12),
+                rgba(150,90,255,0.25)
+            );
+            border: 2px solid rgba(255,255,255,0.4);
+            box-shadow:
+                inset 15px 15px 40px rgba(255,255,255,0.15),
+                inset -15px -15px 40px rgba(0,0,0,0.15),
+                0 30px 80px rgba(40,100,255,0.3);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        section:not(.hero) {
+            padding: 90px 7%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .section-description {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 40px;
+            font-size: 17px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            padding: 35px;
+            min-height: 260px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            transition: 0.35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #5ec8ff;
+            filter: blur(70px);
+            opacity: 0.2;
+            top: -80px;
+            right: -50px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            background: rgba(255,255,255,0.14);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 13px;
+        }
+
+        .card p {
+            color: rgba(255,255,255,0.62);
+            line-height: 1.6;
+        }
+
+        .card button {
+            position: relative;
+            z-index: 2;
+        }
+
+        .download-box {
+            padding: 60px;
+            border-radius: 35px;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                rgba(80,140,255,0.18),
+                rgba(140,80,255,0.15)
+            );
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.3),
+                0 30px 80px rgba(0,0,0,0.25);
+        }
+
+        .download-box h2 {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        .download-box h2 span {
+            color: #78d8ff;
+        }
+
+        .download-box p {
+            color: rgba(255,255,255,0.65);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .release-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            margin-bottom: 20px;
+            border-radius: 50px;
+            background: rgba(100,220,170,0.14);
+            border: 1px solid rgba(150,255,210,0.25);
+            color: #b9ffe0;
+            font-weight: 600;
+        }
+
+        .release-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #7dffc0;
+            box-shadow: 0 0 12px #7dffc0;
+        }
+
+        .version-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .version-card {
+            padding: 30px;
+            border-radius: 28px;
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            transition: 0.3s;
+        }
+
+        .version-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255,255,255,0.14);
+        }
+
+        .version-card h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .version-card p {
+            color: rgba(255,255,255,0.62);
+            line-height: 1.6;
+            min-height: 105px;
+        }
+
+        .version-status {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.75);
+        }
+
+        .version-status.latest {
+            background: rgba(100,220,170,0.15);
+            color: #b9ffe0;
+        }
+
+        .terms-box {
+            padding: 50px;
+            border-radius: 35px;
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.2);
+        }
+
+        .terms-box p {
+            color: rgba(255,255,255,0.68);
+            line-height: 1.75;
+            margin-bottom: 18px;
+        }
+
+        .terms-box strong {
+            color: white;
+        }
+
+        footer {
+            margin: 30px 7%;
+            padding: 30px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(25px);
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer-brand {
+            color: rgba(255,255,255,0.75);
+            font-weight: 700;
+        }
+
+        @media (max-width: 1050px) {
+            nav .links a {
+                padding: 9px 8px;
+                font-size: 14px;
+            }
+
+            .hero-content {
+                padding: 50px;
+            }
+
+            .hero-orb {
+                width: 220px;
+                height: 220px;
+                flex-basis: 220px;
+                font-size: 95px;
+            }
+
+            .cards,
+            .version-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 850px) {
+            nav {
+                left: 3%;
+                right: 3%;
+            }
+
+            nav .links {
+                display: none;
+            }
+
+            .hero {
+                padding: 110px 4% 50px;
+            }
+
+            .hero-content {
+                padding: 45px 25px;
+                flex-direction: column;
+                min-height: auto;
+                text-align: center;
+            }
+
+            .hero-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h1 {
+                letter-spacing: -4px;
+            }
+
+            .hero-orb {
+                width: 190px;
+                height: 190px;
+                flex: 0 0 190px;
+                border-radius: 50px;
+                font-size: 80px;
+            }
+
+            .cards,
+            .version-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-box,
+            .terms-box {
+                padding: 45px 25px;
+            }
+
+            .download-box h2 {
+                font-size: 35px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .version-card p {
+                min-height: auto;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Навигация -->
+    <nav>
+        <div class="logo">
+            komp<span>OS</span>
+        </div>
+
+        <div class="links">
+            <a href="#about">О системе</a>
+            <a href="#features">Возможности</a>
+            <a href="#versions">Версии</a>
+            <a href="#help">Справка</a>
+            <a href="#terms">Условия</a>
+            <a href="#youtube">YouTube</a>
+            <a href="#download">Скачать</a>
+        </div>
+    </nav>
+
+
+    <!-- Главный экран -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-text">
+
+                <div class="badge">
+                    ✦ Новая операционная система
+                </div>
+
+                <h1>kompOS</h1>
+
+                <h2>
+                    Лёгкость. Скорость. Контроль.
+                </h2>
+
+                <p>
+                    kompOS — современная сборка, основанная на Windows 10,
+                    созданная для производительности, удобства
+                    и свободы.
+                </p>
+
+                <div class="buttons">
+
+                    <button class="primary"
+                            onclick="scrollToSection('versions')">
+                        ↓&nbsp; Скачать kompOS
+                    </button>
+
+                    <button onclick="scrollToSection('about')">
+                        Узнать больше →
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="hero-orb">
+                10
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- О системе -->
+    <section id="about">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Почему kompOS?
+            </h2>
+
+            <p class="section-description">
+                Мы сделали систему простой, красивой и быстрой.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="icon">⚡</div>
+                    <h3>Быстрая</h3>
+                    <p>
+                        Оптимизирована для максимальной скорости
+                        работы и минимального количества лишних процессов.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">👨‍💻</div>
+                    <h3>Нет телеметрии</h3>
+                    <p>
+                        Телеметрия и сбор данных
+                        от Microsoft удалены.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🔒</div>
+                    <h3>Под контролем</h3>
+                    <p>
+                        Ты сам решаешь, какие программы и компоненты
+                        должны быть в системе.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Возможности -->
+    <section id="features">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Возможности
+            </h2>
+
+            <p class="section-description">
+                Всё необходимое для комфортной работы.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="icon">🚀</div>
+                    <h3>Производительность</h3>
+                    <p>
+                        Минимум фоновой нагрузки и быстрый запуск системы.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🎨</div>
+                    <h3>Персонализация</h3>
+                    <p>
+                        Оригинальная функция Windows.
+                        (изменение обоев, цвета и т.д)
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🛠️</div>
+                    <h3>Настройка</h3>
+                    <p>
+                        Настраивай систему под себя и устанавливай
+                        только нужное.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Все версии kompOS -->
+    <section id="versions">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Все версии kompOS
+            </h2>
+
+            <p class="section-description">
+                История выпусков и доступные версии операционной системы.
+            </p>
+
+            <div class="version-grid">
+
+                <div class="version-card">
+
+                    <span class="version-status latest">
+                        ● Первый релиз
+                    </span>
+
+                    <h3>kompOS 10 1809</h3>
+
+                    <p>
+                        Первая версия kompOS. Базовая сборка
+                        с оптимизированными компонентами.
+                    </p>
+
+                    <button class="primary"
+                            onclick="openLatestRelease()">
+                        Скачать
+                    </button>
+
+                </div>
+
+
+                <div class="version-card">
+
+                    <span class="version-status">
+                        Недоступно
+                    </span>
+
+                    <h3>kompOS 10 1903</h3>
+
+                    <p>
+                        В разработке....
+                    </p>
+
+                    <button onclick="versionUnavailable('kompOS 10 1903')">
+                        Скачать
+                    </button>
+
+                </div>
+
+
+                <div class="version-card">
+
+                    <span class="version-status">
+                        Недоступно
+                    </span>
+
+                    <h3>kompOS 10 1909</h3>
+
+                    <p>
+                        В разработке....
+                    </p>
+
+                    <button onclick="versionUnavailable('kompOS 10 1909')">
+                        Скачать
+                    </button>
+
+                </div>
+
+
+                <div class="version-card">
+
+                    <span class="version-status">
+                        Недоступно
+                    </span>
+
+                    <h3>kompOS 10 2004</h3>
+
+                    <p>
+                        В разработке....
+                    </p>
+
+                    <button onclick="versionUnavailable('kompOS 10 2004')">
+                        Скачать
+                    </button>
+
+                </div>
+
+
+                <div class="version-card">
+
+                    <span class="version-status">
+                        Недоступно
+                    </span>
+
+                    <h3>kompOS 10 LTSC 20H2</h3>
+
+                    <p>
+                        В разработке....
+                    </p>
+
+                    <button onclick="versionUnavailable('kompOS 10 LTSC 20H2')">
+                        Скачать
+                    </button>
+
+                </div>
+
+
+                <div class="version-card">
+
+                    <span class="version-status">
+                        Недоступно
+                    </span>
+
+                    <h3>kompOS 10 LTSC 21H2</h3>
+
+                    <p>
+                        В разработке....
+                    </p>
+
+                    <button onclick="versionUnavailable('kompOS 10 LTSC 21H2')">
+                        Скачать
+                    </button>
+
+                </div>
+
+
+                <div class="version-card">
+
+                    <span class="version-status">
+                        Недоступно
+                    </span>
+
+                    <h3>kompOS 10 22H2</h3>
+
+                    <p>
+                        В разработке....
+                    </p>
+
+                    <button onclick="versionUnavailable('kompOS 10 22H2')">
+                        Скачать
+                    </button>
+
+                </div>
+
+
+                <div class="version-card">
+
+                    <span class="version-status">
+                        Релиз
+                    </span>
+
+                    <h3>kompOS ?</h3>
+
+                    <p>
+                        В разработке....
+                    </p>
+
+                    <button onclick="versionUnavailable('kompOS ?')">
+                        Скачать
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Справка -->
+    <section id="help">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Справка
+            </h2>
+
+            <p class="section-description">
+                Ответы на часто задаваемые вопросы о kompOS.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="icon">💻</div>
+                    <h3>Что такое kompOS?</h3>
+                    <p>
+                        kompOS — пользовательская сборка операционной
+                        системы Windows 10, созданная с упором на производительность и
+                        удобство со стороны пользователей.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">⚙️</div>
+                    <h3>Как установить?</h3>
+                    <p>
+                        Скачай ISO-образ нужной версии, создай загрузочный
+                        USB-накопитель и запусти установку с него.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">⚠️</div>
+                    <h3>Кто отвечает за установку?</h3>
+                    <p>
+                        Пользователь самостоятельно принимает решение
+                        об установке системы и несёт ответственность
+                        за возможные риски.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">💾</div>
+                    <h3>Нужно ли делать резервную копию?</h3>
+                    <p>
+                        Да. Перед установкой рекомендуется сохранить
+                        важные файлы на отдельном накопителе. (Или сделать резервную копию диска)
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📦</div>
+                    <h3>Где посмотреть версии?</h3>
+                    <p>
+                        Все доступные версии kompOS находятся
+                        на странице «Все версии kompOS».
+                    </p>
+
+                    <br>
+
+                    <button onclick="scrollToSection('versions')">
+                        Посмотреть версии →
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="icon">⬇️</div>
+                    <h3>Где скачать kompOS?</h3>
+                    <p>
+                        Перейди в раздел «Все версии kompOS»
+                        и выбери нужную сборку.
+                    </p>
+
+                    <br>
+
+                    <button class="primary"
+                            onclick="scrollToSection('versions')">
+                        Скачать →
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Условия установки -->
+    <section id="terms">
+
+        <div class="container">
+
+            <div class="terms-box">
+
+                <div class="badge">
+                    ⚠️ Перед установкой
+                </div>
+
+                <h2 class="section-title">
+                    Условия установки
+                </h2>
+
+                <p>
+                    Устанавливая kompOS, пользователь подтверждает,
+                    что понимает возможные риски установки
+                    операционной системы.
+                </p>
+
+                <p>
+                    <strong>
+                        Вся ответственность за установку, использование
+                        и возможные последствия лежит непосредственно
+                        на пользователе. Если что-то в системе неправильно
+                        работает, то ненужно обвинять сборщика. Проблема исключительно
+                        со стороны Microsoft
+                    </strong>
+                </p>
+
+                <p>
+                    Перед началом установки рекомендуется создать
+                    резервную копию важных файлов (или целого диска), загрузить драйвера и убедиться,
+                    что оборудование соответствует системным требованиям.
+                </p>
+
+                <div class="buttons">
+
+                    <button onclick="scrollToSection('versions')">
+                        Я ознакомился
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- YouTube -->
+    <section id="youtube">
+        <div class="container">
+            <div class="download-box">
+                <div class="release-badge">
+                    <span class="release-dot"></span>
+                    YouTube
+                </div>
+
+                <h2>YouTube <span>кимпат67киз</span></h2>
+
+                <p>
+                    Подписывайся на канал, чтобы следить за новостями,
+                    обновлениями и новыми сборками kompOS.
+                </p>
+
+                <div style="font-size:42px;font-weight:700;margin:20px 0 8px;">
+                    <span id="subscriberCount">Загрузка…</span>
+                </div>
+
+                <p style="margin-bottom:25px;">
+                    подписчиков
+                    <span id="subscriberUpdated"
+                          style="display:block;font-size:13px;margin-top:7px;opacity:.65;">
+                        Обновление статистики…
+                    </span>
+                </p>
+
+                <div class="buttons" style="justify-content:center;">
+                    <button class="primary"
+                            onclick="window.open('https://www.youtube.com/@kompot67k', '_blank')">
+                        ▶&nbsp; Открыть YouTube
+                    </button>
+
+                    <button onclick="updateSubscriberCount()">
+                        ↻&nbsp; Обновить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Последний релиз / Скачать -->
+    <section id="download">
+
+        <div class="container">
+
+            <div class="download-box">
+
+                <div class="release-badge">
+                    <span class="release-dot"></span>
+                    Последний релиз сборки
+                </div>
+
+                <h2>
+                    komp<span>OS</span> 10 1809
+                </h2>
+
+                <p>
+                    Это последний (на данный момент) релиз данной сборки kompOS.
+                    Скачай ISO-образ и попробуй систему :)
+                </p>
+
+                <button class="primary"
+                        onclick="openLatestRelease()">
+                    ↓&nbsp; Скачать образ
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Футер -->
+    <footer>
+
+        <div class="footer-brand">
+            kompOS
+        </div>
+
+        <div>
+            © 2026 кимпат67киз Все права украдены >:)
+        </div>
+
+        <div>
+            Сделано с ❤️
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        const latestReleaseUrl =
+            "https://drive.google.com/file/d/1K0s0k08L_MwDq1StasSfAtuS9Kb4hUoK/view?usp=sharing";
+
+
+        function openLatestRelease() {
+            window.open(latestReleaseUrl, "_blank");
+        }
+
+
+        function scrollToSection(id) {
+
+            const section = document.getElementById(id);
+
+            if (section) {
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+
+        }
+
+
+        function versionUnavailable(version) {
+
+            alert(
+                version +
+                " пока недоступна для скачивания\n\n" +
+                "На данный момент доступен последний релиз: " +
+                "kompOS 10 1809."
+            );
+
+        }
+
+
+        // YouTube Data API v3
+        // Вставь сюда свой API key:
+        const youtubeApiKey = "AIzaSyCk-6FgmN-iEroJEf_NXplAnoy0apQc60c";
+        const youtubeHandle = "@kompot67k";
+
+        async function updateSubscriberCount() {
+            const countElement = document.getElementById("subscriberCount");
+            const updatedElement = document.getElementById("subscriberUpdated");
+
+            if (!countElement || !updatedElement) return;
+
+            if (youtubeApiKey === "YOUR_YOUTUBE_API_KEY") {
+                countElement.textContent = "API key не задан";
+                updatedElement.textContent =
+                    "Добавь YouTube Data API v3 ключ в код сайта.";
+                return;
+            }
+
+            countElement.textContent = "Загрузка…";
+            updatedElement.textContent = "Получаем данные с YouTube…";
+
+            try {
+                const url =
+                    "https://www.googleapis.com/youtube/v3/channels" +
+                    "?part=statistics" +
+                    "&forHandle=" + encodeURIComponent(youtubeHandle) +
+                    "&key=" + encodeURIComponent(youtubeApiKey);
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("YouTube API: " + response.status);
+                }
+
+                const data = await response.json();
+
+                if (!data.items || !data.items.length) {
+                    throw new Error("Канал не найден");
+                }
+
+                const statistics = data.items[0].statistics;
+
+                if (statistics.hiddenSubscriberCount) {
+                    countElement.textContent = "Скрыто";
+                    updatedElement.textContent =
+                        "Количество подписчиков скрыто владельцем канала.";
+                    return;
+                }
+
+                const subscribers = Number(statistics.subscriberCount);
+
+                countElement.textContent =
+                    subscribers.toLocaleString("ru-RU");
+
+                updatedElement.textContent =
+                    "Последнее обновление: " +
+                    new Date().toLocaleTimeString("ru-RU");
+
+            } catch (error) {
+                console.error(error);
+                countElement.textContent = "Недоступно";
+                updatedElement.textContent =
+                    "Не удалось получить статистику YouTube.";
+            }
+        }
+
+        updateSubscriberCount();
+
+        // Обновление каждые 5 минут.
+        setInterval(updateSubscriberCount, 5 * 60 * 1000);
+
+    </script>
+
+</body>
+</html>
